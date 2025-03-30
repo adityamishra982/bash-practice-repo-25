@@ -6,3 +6,8 @@ grep -E 'Tctl|Tdie|Package id' /sys/class/hwmon/hwmon*/temp*_label | head -n1 | 
 #
 # Celcius: 42.0 C
 # Fahrenheit: 107.6 F
+
+temperature_celsius=$(echo "scale=1; $temperature_milli_celcius / 1000" | bc)
+temperature_fahrenheit=$(echo "scale=1; ($temperature_celsius * 9 / 5) + 32" | bc)
+echo "Celsius: ${temperature_celsius} C"
+echo "Fahrenheit: ${temperature_fahrenheit} F"
